@@ -1,0 +1,7 @@
+[versions]
+python = "3.11"
+playwright = "1.52.0"
+pytest = "8.3.5"
+pytest_playwright = "0.7.0"
+python_dotenv = "1.1.0"
+ruff = "0.11.8"

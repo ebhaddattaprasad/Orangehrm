@@ -1,0 +1,26 @@
+{
+  "PORTAL-T3625": {
+    "expected_url_keyword": "/dashboard"
+  },
+  "PORTAL-T3626": {
+    "expected_url_keyword": "/dashboard"
+  },
+  "PORTAL-T001": {
+    "sidebar_item": "Leave"
+  },
+  "PORTAL-T002": {
+    "sidebar_item": "Leave"
+  },
+  "PORTAL-T003": {
+    "sidebar_item": "Leave",
+    "sub_sidebar_item": "Apply"
+  },
+  "PORTAL-T004": {
+    "sidebar_item": "Leave",
+    "sub_sidebar_item": "My Leave"
+  },
+  "PORTAL-T005": {
+    "sidebar_item": "Leave",
+    "sub_sidebar_item": "My Leave"
+  }
+}
