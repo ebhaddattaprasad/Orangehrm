@@ -90,3 +90,9 @@ def test_Verify_Search_returns_No_Records_Found_when_no_leaves_exist(
     common_actions.navigate_to_sub_sidebar_item(test_data["sub_sidebar_item"])
     leave_actions.verify_default_date_range_and_status_chips_on_load()
     leave_actions.verify_search_returns_no_records_found_when_no_leaves_exist()
+
+@pytest.mark.key(id="PORTAL-T006")
+def test_Verify_Reset_button_clears_custom_filter_values(
+    page: Page, get_test_data
+) -> None:
+    """TC006: Verify Reset button clears custom filter values."""

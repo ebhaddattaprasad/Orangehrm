@@ -8,3 +8,5 @@ test-results/
 *.html
 .ruff_cache/
 assets/
+playwright_python_framework.egg-info/
+uv.lock
