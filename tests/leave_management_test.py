@@ -95,4 +95,4 @@ def test_Verify_Search_returns_No_Records_Found_when_no_leaves_exist(
 def test_Verify_Reset_button_clears_custom_filter_values(
     page: Page, get_test_data
 ) -> None:
-    """TC006: Verify Reset button clears custom filter values. """
+    """TC006: Verify Reset button clears custom filter values. The test should verify that the custom filter values are cleared when the Reset button is clicked."""
