@@ -89,5 +89,3 @@ def key_id(request: pytest.FixtureRequest, record_property) -> str:
     marker_id = marker.kwargs.get("id", "") if marker else ""
     record_property("key_id", marker_id)
     return marker_id
-
-
