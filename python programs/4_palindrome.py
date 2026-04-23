@@ -1,7 +1,7 @@
-a="madam"
-b=a[::-1]
+a = "madam"
+b = a[::-1]
 print(b)
-if a==b:
+if a == b:
     print(True)
 else:
     print(False)

@@ -22,5 +22,13 @@
   "PORTAL-T005": {
     "sidebar_item": "Leave",
     "sub_sidebar_item": "My Leave"
+  },
+  "PORTAL-T006": {
+    "sidebar_item": "Leave",
+    "sub_sidebar_item": "My Leave"
+  },
+  "PORTAL-T007": {
+    "sidebar_item": "Leave",
+    "sub_sidebar_item": "My Leave"
   }
 }

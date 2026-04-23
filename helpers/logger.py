@@ -20,4 +20,3 @@ def get_logger(profile: str, name: str) -> logging.Logger:
         logger.addHandler(handler)
         logger.setLevel(logging.INFO)
     return logger
-

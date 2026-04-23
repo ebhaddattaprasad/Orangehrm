@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from playwright.sync_api import expect
 
 from page_objects.common_page import CommonPage
@@ -27,3 +29,9 @@ class CommonActions:
         sub_header_locator = self.common_page.SUB_SIDEBAR_ITEM.copy()
         sub_header_locator["name"] = option_name
         expect(self.page.get_by_role(**sub_header_locator)).to_be_visible()
+
+    def get_today_date(self) -> str:
+        return datetime.now().strftime("%Y-%d-%m")
+
+    def get_last_month_date(self) -> str:
+        return (datetime.now() - timedelta(days=30)).strftime("%Y-%d-%m")

@@ -2,5 +2,31 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.11.8
     hooks:
-      - id: ruff-check
+      - id: ruff
       - id: ruff-format
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-json
+      - id: name-tests-test
+        exclude: ^tests/test_login\.py$|^tests/helpers/|^tests/examples/|^tests/page_objects/|^tests/actions/|^tests/configs/|^tests/data/
+
+  - repo: local
+    hooks:
+      - id: check-line-limit
+        name: Check file line limit (max 500 lines)
+        entry: uv run scripts/check_line_limit.py
+        language: system
+        pass_filenames: false
+        files: ^(tests|page_objects|actions)/.*\.py$
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        exclude: README.*|.env.example|docs/.*

@@ -1,4 +1,4 @@
-#BASE_URL=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
+# BASE_URL=https://opensource-demo.orangehrmlive.com/web/index.php/auth/login
 import pytest
 from playwright.sync_api import Page
 
@@ -91,8 +91,29 @@ def test_Verify_Search_returns_No_Records_Found_when_no_leaves_exist(
     leave_actions.verify_default_date_range_and_status_chips_on_load()
     leave_actions.verify_search_returns_no_records_found_when_no_leaves_exist()
 
+
 @pytest.mark.key(id="PORTAL-T006")
-def test_Verify_Reset_button_clears_custom_filter_values(
+def test_Verify_Reset_button_clears_custom_filter_values(page: Page, get_test_data) -> None:
+    """TC006: Verify Reset button clears custom filter values.
+
+    The test should verify that custom filter values are cleared when Reset is clicked.
+    """
+
+
+@pytest.mark.key(id="PORTAL-T007")
+def test_Verify_filtering_by_custom_date_range_with_no_matching_records(
     page: Page, get_test_data
 ) -> None:
-    """TC006: Verify Reset button clears custom filter values. The test should verify that the custom filter values are cleared when the Reset button is clicked."""
+    """TC007: Verify filtering by custom date range with no matching records."""
+    login_page = LoginPage(page)
+    common_actions = CommonActions(page)
+    dashboard_actions = DashboardActions(page, login_page)
+    leave_actions = LeaveActions(page)
+    admin_credentials = get_user_credentials("admin")
+    test_data = get_test_data("PORTAL-T007")
+    dashboard_actions.login_and_wait_for_dashboard(**admin_credentials)
+    dashboard_actions.verify_dashboard_loaded()
+    common_actions.navigate_to_left_sidebar_item(test_data["sidebar_item"])
+    common_actions.navigate_to_sub_sidebar_item(test_data["sub_sidebar_item"])
+    leave_actions.add_to_from_date_filter()
+    leave_actions.click_search_button()

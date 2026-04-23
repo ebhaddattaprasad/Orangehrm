@@ -1,4 +1,0 @@
-actions
-helpers
-page_objects
-tests
