@@ -41,19 +41,24 @@ class LeaveActions:
             )
         ).to_be_visible(timeout=10000)
 
-    def add_to_from_date_filter(self) -> None:
-        "To date"
-        self.page.get_by_role(**self.leave_page.DATE_TEXT_BOX).first.click()
-        self.page.get_by_role(**self.leave_page.DATE_TEXT_BOX).first.press("ControlOrMeta+a")
-        self.page.get_by_role(**self.leave_page.DATE_TEXT_BOX).first.fill(
-            self.common_actions.get_last_month_date()
-        )
-        "From Date"
-        self.page.get_by_role(**self.leave_page.DATE_TEXT_BOX).nth(1).click()
-        self.page.get_by_role(**self.leave_page.DATE_TEXT_BOX).nth(1).press("ControlOrMeta+a")
-        self.page.get_by_role(**self.leave_page.DATE_TEXT_BOX).nth(1).fill(
-            self.common_actions.get_today_date()
-        )
+    def add_to_from_date_filter(
+        self, to_date: str | None = None, from_date: str | None = None
+    ) -> None:
+        """Fill To/From date filters; values can be provided by the test."""
+        resolved_from_date = from_date or self.common_actions.get_last_month_date()
+        resolved_to_date = to_date or self.common_actions.get_today_date()
+
+        date_inputs = self.page.get_by_role(**self.leave_page.DATE_TEXT_BOX)
+
+        # To Date (first date field on My Leave filter row)
+        date_inputs.first.click()
+        date_inputs.first.press("ControlOrMeta+a")
+        date_inputs.first.fill(resolved_from_date)
+
+        # From Date (second date field on My Leave filter row)
+        date_inputs.nth(1).click()
+        date_inputs.nth(1).press("ControlOrMeta+a")
+        date_inputs.nth(1).fill(resolved_to_date)
 
     def click_search_button(self) -> None:
         self.page.get_by_role(**self.leave_page.SEARCH_BUTTON).click()

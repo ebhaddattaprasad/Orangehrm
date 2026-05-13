@@ -30,5 +30,9 @@
   "PORTAL-T007": {
     "sidebar_item": "Leave",
     "sub_sidebar_item": "My Leave"
+  },
+  "PORTAL-T101": {
+    "sidebar_item": "Leave",
+    "sub_sidebar_item": "Apply"
   }
 }

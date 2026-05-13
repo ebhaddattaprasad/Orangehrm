@@ -115,5 +115,24 @@ def test_Verify_filtering_by_custom_date_range_with_no_matching_records(
     dashboard_actions.verify_dashboard_loaded()
     common_actions.navigate_to_left_sidebar_item(test_data["sidebar_item"])
     common_actions.navigate_to_sub_sidebar_item(test_data["sub_sidebar_item"])
-    leave_actions.add_to_from_date_filter()
+    leave_actions.add_to_from_date_filter(
+        to_date=common_actions.get_today_date(),
+        from_date=common_actions.get_last_month_date(),
+    )
     leave_actions.click_search_button()
+
+
+@pytest.mark.key(id="PORTAL-T101")
+def test_Verify_leave_is_applied_successfully(
+    page: Page, get_test_data
+) -> None:
+    """TC007: Verify filtering by custom date range with no matching records."""
+    login_page = LoginPage(page)
+    common_actions = CommonActions(page)
+    dashboard_actions = DashboardActions(page, login_page)
+    admin_credentials = get_user_credentials("admin")
+    test_data = get_test_data("PORTAL-T007")
+    dashboard_actions.login_and_wait_for_dashboard(**admin_credentials)
+    dashboard_actions.verify_dashboard_loaded()
+    common_actions.navigate_to_left_sidebar_item(test_data["sidebar_item"])
+    common_actions.navigate_to_sub_sidebar_item(test_data["sub_sidebar_item"])
