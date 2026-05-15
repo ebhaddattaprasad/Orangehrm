@@ -21,7 +21,11 @@ dependencies = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-ra -q"
+addopts = "-ra -q -o log_cli=true -o log_cli_level=INFO"
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s | %(levelname)s | %(name)s | %(filename)s:%(lineno)d | %(funcName)s() | %(message)s"
+log_cli_date_format = "%H:%M:%S"
 markers = [
     "test_case_id(id): Link a test with a test case identifier",
     "key(id): External test management key mapping",

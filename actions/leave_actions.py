@@ -1,14 +1,16 @@
 from playwright.sync_api import expect
 
 from actions.common_actions import CommonActions
+from helpers.logger import LoggableMixin
 from page_objects.leave_page import LeavePage
 
 
-class LeaveActions:
+class LeaveActions(LoggableMixin):
     def __init__(self, page) -> None:
         self.page = page
         self.leave_page = LeavePage(page)
         self.common_actions = CommonActions(page)
+        super().__init__()
 
     def navigate_to_apply_leave_page(self) -> None:
         self.page.get_by_role(**self.leave_page.APPLY_LEAVE_LINK).click()

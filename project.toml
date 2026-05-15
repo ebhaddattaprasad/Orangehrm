@@ -5,3 +5,10 @@ pytest = "8.3.5"
 pytest_playwright = "0.7.0"
 python_dotenv = "1.1.0"
 ruff = "0.11.8"
+
+# Framework logging (used by helpers/logger.py)
+# Change level to DEBUG to see logger.debug(...) in the terminal.
+# LOG_LEVEL / LOG_PROFILE in .env or the shell override these values.
+[logging]
+level = "INFO"
+profile = "default"

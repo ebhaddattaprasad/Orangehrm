@@ -2,13 +2,16 @@
 
 from playwright.sync_api import Page
 
+from helpers.logger import LoggableMixin
 
-class LoginPage:
+
+class LoginPage(LoggableMixin):
     DASHBOARD_HEADER = "h6:has-text('Dashboard')"
     ERROR_MESSAGE = ".oxd-alert-content-text"
 
     def __init__(self, page: Page) -> None:
         self.page = page
+        super().__init__()
 
     def open(self, url: str) -> None:
         self.page.goto(url)
