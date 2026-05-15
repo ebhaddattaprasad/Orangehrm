@@ -8,11 +8,24 @@ from pathlib import Path
 import pytest
 from dotenv import load_dotenv
 
+from configs.project_config import get_log_level_name
 from helpers.data_reader import read_json_file
+from helpers.logger import LOG_DATE_FORMAT, LOG_FORMAT, configure_root_logging
 
 ROOT_DIR = Path(__file__).resolve().parent
 DATA_FILE = ROOT_DIR / "data" / "test_data.json"
 ENV_FILE = ROOT_DIR / ".env"
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    """Enable live terminal logs; level comes from project.toml / LOG_LEVEL."""
+    load_dotenv(dotenv_path=ENV_FILE, override=False)
+    configure_root_logging()
+    level_name = get_log_level_name()
+    config.option.log_cli = True
+    config.option.log_cli_level = level_name
+    config.option.log_cli_format = LOG_FORMAT
+    config.option.log_cli_date_format = LOG_DATE_FORMAT
 
 
 @pytest.fixture(scope="session", autouse=True)

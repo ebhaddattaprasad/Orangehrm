@@ -3,14 +3,16 @@
 from playwright.sync_api import expect
 
 from actions.login_actions import LoginActions
+from helpers.logger import LoggableMixin
 from page_objects.dashboard_functions_page import DashboardPage
 from page_objects.login_page import LoginPage
 
 
-class DashboardActions:
+class DashboardActions(LoggableMixin):
     def __init__(self, page, login_page: LoginPage) -> None:
         self.login_actions = LoginActions(login_page)
         self.dashboard_page = DashboardPage(page)
+        super().__init__()
 
     def login_and_wait_for_dashboard(self, base_url: str, username: str, password: str) -> None:
         """Login with valid credentials and wait for dashboard."""

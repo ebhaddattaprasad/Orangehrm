@@ -2,8 +2,10 @@
 
 from playwright.sync_api import Page
 
+from helpers.logger import LoggableMixin
 
-class DashboardPage:
+
+class DashboardPage(LoggableMixin):
     DASHBOARD_HEADER = "h6:has-text('Dashboard')"
     USER_DROPDOWN = ".oxd-userdropdown-tab"
     TIME_AT_WORK_WIDGET = "text=Time at Work"
@@ -12,6 +14,7 @@ class DashboardPage:
 
     def __init__(self, page: Page) -> None:
         self.page = page
+        super().__init__()
 
     def wait_for_dashboard_loaded(self, timeout_ms: int = 15000) -> None:
         """Wait until dashboard URL and key dashboard header are visible."""

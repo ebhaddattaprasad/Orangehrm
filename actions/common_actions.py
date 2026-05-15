@@ -2,15 +2,18 @@ from datetime import datetime, timedelta
 
 from playwright.sync_api import expect
 
+from helpers.logger import LoggableMixin
 from page_objects.common_page import CommonPage
 
 
-class CommonActions:
+class CommonActions(LoggableMixin):
     def __init__(self, page) -> None:
         self.page = page
         self.common_page = CommonPage(page)
+        super().__init__()
 
     def navigate_to_left_sidebar_item(self, option_name: str) -> None:
+        self.logger.info(f"Navigating to left sidebar item: {option_name}")
         sidebar_locator = self.common_page.NAVIGATION_LEFT_SIDEBAR_ITEM.copy()
         sidebar_locator["name"] = option_name
         expect(self.page.get_by_role(**sidebar_locator)).to_be_visible()
@@ -21,6 +24,7 @@ class CommonActions:
         expect(self.page.get_by_role(**header_locator)).to_be_visible()
 
     def navigate_to_sub_sidebar_item(self, option_name: str) -> None:
+        self.logger.info(f"Navigating to sub sidebar item: {option_name}")
         sub_sidebar_locator = self.common_page.SUB_SIDEBAR_ITEM.copy()
         sub_sidebar_locator["name"] = option_name
         expect(self.page.get_by_role(**sub_sidebar_locator)).to_be_visible()
@@ -31,7 +35,11 @@ class CommonActions:
         expect(self.page.get_by_role(**sub_header_locator)).to_be_visible()
 
     def get_today_date(self) -> str:
+        self.logger.info("Getting today's date")
+        self.logger.info(f"Today's date: {datetime.now().strftime('%Y-%d-%m')}")
         return datetime.now().strftime("%Y-%d-%m")
 
     def get_last_month_date(self) -> str:
+        self.logger.info("Getting last month's date")
+        self.logger.info(f"Last month's date: {(datetime.now() - timedelta(days=30)).strftime('%Y-%d-%m')}")
         return (datetime.now() - timedelta(days=30)).strftime("%Y-%d-%m")
