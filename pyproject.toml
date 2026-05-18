@@ -32,11 +32,20 @@ markers = [
 ]
 
 [tool.ruff]
-line-length = 100
+line-length = 130
 target-version = "py311"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "W"]
+select = ["E", "F", "I", "W", "N"]
+
+[tool.ruff.lint.pep8-naming]
+# test functions must be lowercase snake_case (N802 catches uppercase letters in function names)
+classmethod-decorators = ["classmethod"]
+
+[tool.ruff.format]
+# line-length is inherited from [tool.ruff] above
+indent-style = "space"
+quote-style = "double"
 
 [tool.setuptools.packages.find]
 include = ["actions*", "helpers*", "page_objects*", "tests*"]

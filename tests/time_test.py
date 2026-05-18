@@ -7,6 +7,7 @@ from actions.time_actions import TimeActions
 from configs.env_config import get_user_credentials
 from page_objects.login_page import LoginPage
 
+
 @pytest.mark.key(id="PORTAL-T201")
 def test_no_timesheet_found_for_the_employee(page: Page, get_test_data) -> None:
     """TC201: No timesheet found for the employee."""
@@ -26,6 +27,7 @@ def test_no_timesheet_found_for_the_employee(page: Page, get_test_data) -> None:
     time_actions.click_on_view_button()
     time_actions.verify_no_timesheets_found_for_the_employee()
 
+
 @pytest.mark.key(id="PORTAL-T202")
 def test_verify_timesheet_for_the_employee(page: Page, get_test_data) -> None:
     """TC202: Verify punch in and out for the employee."""
@@ -42,5 +44,5 @@ def test_verify_timesheet_for_the_employee(page: Page, get_test_data) -> None:
     time_actions.select_punch_in_and_out_from_dropdown()
     time_actions.add_date_and_time(common_actions.get_today_date(), common_actions.get_today_time())
     time_actions.add_note(test_data["note"])
-    time_actions.click_on_punch_in_or_out_button(test_data["button_name"])
+    time_actions.click_on_punch_in_or_out_button()
     time_actions.verify_success_message()

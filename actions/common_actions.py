@@ -43,7 +43,7 @@ class CommonActions(LoggableMixin):
         self.logger.info("Getting last month's date")
         self.logger.info(f"Last month's date: {(datetime.now() - timedelta(days=30)).strftime('%Y-%d-%m')}")
         return (datetime.now() - timedelta(days=30)).strftime("%Y-%d-%m")
-    
+
     def get_today_time(self) -> str:
         self.logger.info("Getting today's time in 12 hour format like 12:23 PM")
         self.logger.info(f"Today's time: {datetime.now().strftime('%I:%M %p')}")

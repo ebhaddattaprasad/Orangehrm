@@ -33,14 +33,14 @@ class TimeActions(LoggableMixin):
         expect(self.page.get_by_role(**dropdown_option)).to_be_visible(timeout=10000)
         self.page.get_by_role(**dropdown_option).click()
         self.logger.info(f"Selected employee from dropdown: {employee_name}")
-    
+
     def click_on_view_button(self) -> None:
         """Click on the View button to open the timesheet."""
         self.logger.info("Clicking on the View button")
         expect(self.page.locator(self.time_page.FORM_LOCATOR).get_by_role(**self.time_page.VIEW_BUTTON)).to_be_visible()
         self.page.locator(self.time_page.FORM_LOCATOR).get_by_role(**self.time_page.VIEW_BUTTON).click()
         self.logger.info("Clicked on the View button")
-    
+
     def verify_no_timesheets_found_for_the_employee(self) -> None:
         """Verify that no timesheets are found for the employee."""
         expect(self.page.get_by_role(**self.time_page.NO_RECORDS_FOUND)).to_be_visible()
@@ -54,7 +54,7 @@ class TimeActions(LoggableMixin):
         expect(self.page.get_by_role(**self.time_page.PUNCH_IN_AND_OUT_LOCATOR)).to_be_visible()
         self.page.get_by_role(**self.time_page.PUNCH_IN_AND_OUT_LOCATOR).click()
         self.logger.info("Clicked on the punch in and out button")
-    
+
     def add_date_and_time(self, date: str, time: str) -> None:
         """Add date and time to the timesheet."""
         self.page.get_by_role(**self.time_page.DATE_TEXT_BOX).click()
@@ -66,7 +66,7 @@ class TimeActions(LoggableMixin):
         self.page.get_by_role(**self.time_page.TIME_TEXT_BOX).press("ControlOrMeta+a")
         self.page.get_by_role(**self.time_page.TIME_TEXT_BOX).fill(self.common_actions.get_today_time())
         self.logger.info(f"Added time to the timesheet: {time}")
-    
+
     def add_note(self, note: str) -> None:
         """Add note to the timesheet."""
         self.page.locator(".orangehrm-paper-container").click()
@@ -74,19 +74,25 @@ class TimeActions(LoggableMixin):
         self.page.get_by_role(**self.time_page.NOTE_TEXT_BOX).press("ControlOrMeta+a")
         self.page.get_by_role(**self.time_page.NOTE_TEXT_BOX).fill(note)
         self.logger.info(f"Added note to the timesheet: {note}")
-    
-    def click_on_punch_in_or_out_button(self, button_name: str) -> None:
-        """Click on the punch in or out button."""
-        button_locator = self.time_page.PUNCH_IN_OR_OUT_BUTTON.copy()
-        button_locator["name"] = button_name
-        expect(self.page.get_by_role(**button_locator)).to_be_visible()
-        self.page.get_by_role(**button_locator).click()
-        self.page.get_by_role(**button_locator).click()
-        self.logger.info(f"Clicked on the {button_name} button")
-    
+
+    def click_on_punch_in_or_out_button(self) -> None:
+        """Click In or Out — whichever button is present on the UI."""
+        form = self.page.locator(self.time_page.PUNCH_FORM_LOCATOR)
+        punch_in = form.get_by_role(**self.time_page.PUNCH_IN_BUTTON)
+        punch_out = form.get_by_role(**self.time_page.PUNCH_OUT_BUTTON)
+
+        if punch_in.is_visible():
+            expect(punch_in).to_be_enabled()
+            punch_in.click()
+            self.logger.info("Clicked on the In button")
+        elif punch_out.is_visible():
+            expect(punch_out).to_be_enabled()
+            punch_out.click()
+            self.logger.info("Clicked on the Out button")
+        else:
+            raise AssertionError("Neither In nor Out button is visible on the punch form")
+
     def verify_success_message(self) -> None:
         """Verify that the punch in is successful."""
         expect(self.page.get_by_text(self.time_page.SUCCESS_MESSAGE_LOCATOR, exact=True)).to_be_visible()
         self.logger.info("Success message is visible")
-
-    
