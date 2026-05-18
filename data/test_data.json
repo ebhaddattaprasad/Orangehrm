@@ -34,5 +34,13 @@
   "PORTAL-T101": {
     "sidebar_item": "Leave",
     "sub_sidebar_item": "Apply"
+  },
+  "PORTAL-T201": {
+    "sidebar_item": "Time"
+  },
+  "PORTAL-T202": {
+    "sidebar_item": "Time",
+    "note": "Test note",
+    "button_name": "Out"
   }
 }
