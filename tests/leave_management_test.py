@@ -10,7 +10,7 @@ from page_objects.login_page import LoginPage
 
 
 @pytest.mark.key(id="PORTAL-T001")
-def test_verify_Apply_Leave_page_loads(page: Page, get_test_data) -> None:
+def test_verify_apply_leave_page_loads(page: Page, get_test_data) -> None:
     """TC001: Verify Apply Leave page loads."""
     login_page = LoginPage(page)
     common_actions = CommonActions(page)
@@ -25,7 +25,7 @@ def test_verify_Apply_Leave_page_loads(page: Page, get_test_data) -> None:
 
 
 @pytest.mark.key(id="PORTAL-T002")
-def test_Verify_message_when_no_leave_balance_exists(page: Page, get_test_data) -> None:
+def test_verify_message_when_no_leave_balance_exists(page: Page, get_test_data) -> None:
     """TC002: Verify message when no leave balance exists."""
     login_page = LoginPage(page)
     common_actions = CommonActions(page)
@@ -41,7 +41,7 @@ def test_Verify_message_when_no_leave_balance_exists(page: Page, get_test_data) 
 
 
 @pytest.mark.key(id="PORTAL-T003")
-def test_Verify_Apply_tab_is_active_highlighted_on_load(page: Page, get_test_data) -> None:
+def test_verify_apply_tab_is_active_highlighted_on_load(page: Page, get_test_data) -> None:
     """TC003: Verify Apply tab is active/highlighted on load."""
     login_page = LoginPage(page)
     common_actions = CommonActions(page)
@@ -58,7 +58,7 @@ def test_Verify_Apply_tab_is_active_highlighted_on_load(page: Page, get_test_dat
 
 
 @pytest.mark.key(id="PORTAL-T004")
-def test_Verify_default_date_range_and_status_chips_on_load(page: Page, get_test_data) -> None:
+def test_verify_default_date_range_and_status_chips_on_load(page: Page, get_test_data) -> None:
     """TC004: Verify default date range and status chips on load."""
     login_page = LoginPage(page)
     common_actions = CommonActions(page)
@@ -74,9 +74,7 @@ def test_Verify_default_date_range_and_status_chips_on_load(page: Page, get_test
 
 
 @pytest.mark.key(id="PORTAL-T005")
-def test_Verify_Search_returns_No_Records_Found_when_no_leaves_exist(
-    page: Page, get_test_data
-) -> None:
+def test_verify_search_returns_no_records_found_when_no_leaves_exist(page: Page, get_test_data) -> None:
     """TC005: Verify Search returns No Records Found when no leaves exist."""
     login_page = LoginPage(page)
     common_actions = CommonActions(page)
@@ -93,7 +91,7 @@ def test_Verify_Search_returns_No_Records_Found_when_no_leaves_exist(
 
 
 @pytest.mark.key(id="PORTAL-T006")
-def test_Verify_Reset_button_clears_custom_filter_values(page: Page, get_test_data) -> None:
+def test_verify_reset_button_clears_custom_filter_values(page: Page, get_test_data) -> None:
     """TC006: Verify Reset button clears custom filter values.
 
     The test should verify that custom filter values are cleared when Reset is clicked.
@@ -101,9 +99,7 @@ def test_Verify_Reset_button_clears_custom_filter_values(page: Page, get_test_da
 
 
 @pytest.mark.key(id="PORTAL-T007")
-def test_Verify_filtering_by_custom_date_range_with_no_matching_records(
-    page: Page, get_test_data
-) -> None:
+def test_verify_filtering_by_custom_date_range_with_no_matching_records(page: Page, get_test_data) -> None:
     """TC007: Verify filtering by custom date range with no matching records."""
     login_page = LoginPage(page)
     common_actions = CommonActions(page)
@@ -123,10 +119,21 @@ def test_Verify_filtering_by_custom_date_range_with_no_matching_records(
 
 
 @pytest.mark.key(id="PORTAL-T101")
-def test_Verify_leave_is_applied_successfully(
-    page: Page, get_test_data
-) -> None:
+def test_verify_leave_is_applied_successfully(page: Page, get_test_data) -> None:
     """TC007: Verify filtering by custom date range with no matching records."""
+    login_page = LoginPage(page)
+    common_actions = CommonActions(page)
+    dashboard_actions = DashboardActions(page, login_page)
+    admin_credentials = get_user_credentials("admin")
+    test_data = get_test_data("PORTAL-T007")
+    dashboard_actions.login_and_wait_for_dashboard(**admin_credentials)
+    dashboard_actions.verify_dashboard_loaded()
+    common_actions.navigate_to_left_sidebar_item(test_data["sidebar_item"])
+    common_actions.navigate_to_sub_sidebar_item(test_data["sub_sidebar_item"])
+
+
+def test_this_is_a_test_function(page: Page, get_test_data) -> None:
+    """This is a test function."""
     login_page = LoginPage(page)
     common_actions = CommonActions(page)
     dashboard_actions = DashboardActions(page, login_page)

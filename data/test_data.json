@@ -40,7 +40,6 @@
   },
   "PORTAL-T202": {
     "sidebar_item": "Time",
-    "note": "Test note",
-    "button_name": "Out"
+    "note": "Test note"
   }
 }
